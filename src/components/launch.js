@@ -19,6 +19,7 @@ import {
   Stack,
   AspectRatioBox,
   StatGroup,
+  Tooltip,
 } from "@chakra-ui/core";
 
 import { useSpaceX } from "../utils/use-space-x";
@@ -114,6 +115,8 @@ function Header({ launch }) {
 }
 
 function TimeAndLocation({ launch }) {
+  const statNumberIsLocalTime = false;
+  const tooltipIsLocalTime = true;
   return (
     <SimpleGrid columns={[1, 1, 2]} borderWidth="1px" p="4" borderRadius="md">
       <Stat>
@@ -123,9 +126,13 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <StatNumber fontSize={["md", "xl"]}>
-          {formatDateTime(launch.launch_date_local)}
-        </StatNumber>
+        <Tooltip label={formatDateTime(launch.launch_date_local, tooltipIsLocalTime)} placement="top">
+          <Box>
+            <StatNumber fontSize={["md", "xl"]}>
+              {formatDateTime(launch.launch_date_local, statNumberIsLocalTime)}
+            </StatNumber>
+          </Box>
+        </Tooltip>
         <StatHelpText>{timeAgo(launch.launch_date_utc)}</StatHelpText>
       </Stat>
       <Stat>
