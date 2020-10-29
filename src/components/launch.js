@@ -21,6 +21,8 @@ import {
   StatGroup,
 } from "@chakra-ui/core";
 
+import FavouritesDrawer from './favourites-drawer'
+
 import { useSpaceX } from "../utils/use-space-x";
 import { formatDateTime } from "../utils/format-date";
 import Error from "./error";
@@ -41,13 +43,16 @@ export default function Launch() {
 
   return (
     <div>
-      <Breadcrumbs
-        items={[
-          { label: "Home", to: "/" },
-          { label: "Launches", to: ".." },
-          { label: `#${launch.flight_number}` },
-        ]}
-      />
+      <Flex lineHeight="tight" justifyContent="space-between" align="center">
+        <Breadcrumbs
+          items={[
+            { label: "Home", to: "/" },
+            { label: "Launches", to: ".." },
+            { label: `#${launch.flight_number}` },
+          ]}
+        />
+        <FavouritesDrawer />
+      </Flex>
       <Header launch={launch} />
       <Box m={[3, 6]}>
         <TimeAndLocation launch={launch} />
