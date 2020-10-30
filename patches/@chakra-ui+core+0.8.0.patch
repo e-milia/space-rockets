@@ -1,0 +1,33 @@
+diff --git a/node_modules/@chakra-ui/core/dist/es/Drawer/index.js b/node_modules/@chakra-ui/core/dist/es/Drawer/index.js
+index 7f0779e..5352e4a 100644
+--- a/node_modules/@chakra-ui/core/dist/es/Drawer/index.js
++++ b/node_modules/@chakra-ui/core/dist/es/Drawer/index.js
+@@ -40,6 +40,7 @@ var Drawer = function Drawer(_ref) {
+       }
+     }, jsx(Modal, _extends({
+       isOpen: true,
++      scrollBehavior: 'inside',
+       onClose: onClose,
+       finalFocusRef: finalFocusRef,
+       formatIds: function formatIds(id) {
+diff --git a/node_modules/@chakra-ui/core/dist/es/Modal/index.js b/node_modules/@chakra-ui/core/dist/es/Modal/index.js
+index 67828ba..97f7b30 100644
+--- a/node_modules/@chakra-ui/core/dist/es/Modal/index.js
++++ b/node_modules/@chakra-ui/core/dist/es/Modal/index.js
+@@ -118,6 +118,7 @@ var Modal = function Modal(_ref2) {
+ 
+   useEffect(function () {
+     var dialogNode = contentRef.current;
++    if (!dialogNode) return;
+ 
+     if (isOpen && blockScrollOnMount) {
+       disableBodyScroll(dialogNode, {
+@@ -128,7 +129,7 @@ var Modal = function Modal(_ref2) {
+     return function () {
+       return enableBodyScroll(dialogNode);
+     };
+-  }, [isOpen, blockScrollOnMount, preserveScrollBarGap]);
++  }, [contentRef.current, isOpen, blockScrollOnMount, preserveScrollBarGap]);
+   useEffect(function () {
+     var func = function func(event) {
+       if (event.key === "Escape" && closeOnEsc) {
