@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/core";
 
 import FavouritesDrawer from './favourites-drawer'
+import FavouritesIcon from './favourites-icon'
 
 import { useSpaceX } from "../utils/use-space-x";
 import { formatDateTime } from "../utils/format-date";
@@ -44,13 +45,16 @@ export default function Launch() {
   return (
     <div>
       <Flex lineHeight="tight" justifyContent="space-between" align="center">
-        <Breadcrumbs
-          items={[
-            { label: "Home", to: "/" },
-            { label: "Launches", to: ".." },
-            { label: `#${launch.flight_number}` },
-          ]}
-        />
+        <Flex justifyContent="start" align="center">
+          <Breadcrumbs
+            items={[
+              { label: "Home", to: "/" },
+              { label: "Launches", to: ".." },
+              { label: `#${launch.flight_number}` },
+            ]}
+            />
+          <FavouritesIcon launch={launch} isSmall={false}/>
+          </Flex>
         <FavouritesDrawer />
       </Flex>
       <Header launch={launch} />
@@ -98,7 +102,7 @@ function Header({ launch }) {
         py="2"
         borderRadius="lg"
       >
-        {launch.mission_name}
+      {launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
         <Badge variantColor="purple" fontSize={["xs", "md"]}>

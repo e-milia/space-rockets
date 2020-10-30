@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Badge,
   Box,
@@ -7,18 +7,16 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/core";
-import { BsDiamond, BsDiamondFill } from "react-icons/bs";
 import { format as timeAgo } from "timeago.js";
 import { Link } from "react-router-dom";
 
 import { useSpaceXPaginated } from "../utils/use-space-x";
 import { formatDate } from "../utils/format-date";
-import { findMissionByKey } from "../utils/find-mission-by-key";
-import { getFromLocalStorage } from "../utils/get-from-local-storage";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
 import FavouritesDrawer from './favourites-drawer'
+import FavouriteIcon from "./favourites-icon";
 
 const PAGE_SIZE = 12;
 
@@ -31,8 +29,7 @@ export default function Launches() {
       sort: "launch_date_utc",
     }
   );
-
-  // console.log(data, error);
+  console.log(data, error);
   return (
     <div>
       <Flex lineHeight="tight" justifyContent="space-between" align="center">
@@ -64,67 +61,7 @@ export default function Launches() {
   );
 }
 
-// export function FavouriteIcon({favourites, key}) {
-//   return findMissionByKey(favourites, launch.flight_number) > -1? (
-//     <Box
-//       as={BsDiamondFill}
-//       size="24px"
-//       color="yellow.400"
-//       onClick={(e) => processFavourite(e)}
-//     />
-//   ) : (
-//     <Box
-//       as={BsDiamond}
-//       size="24px"
-//       color="yellow.400"
-//       onClick={(e) => processFavourite(e)}
-//     />
-//   );
-// };
-
-
 export function LaunchItem({ launch, isSmall }) {
-  console.log('re-rendering launch item')
-  const favouritesData = getFromLocalStorage("favourites") || [];
-  const [favourites, setFavourites] = useState(favouritesData);
-
-  useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(favourites));
-  }, [favourites]);
-
-  const processFavourite = (e) => {
-    console.log('process fave')
-    e.preventDefault();
-    // let tempFavourites = [...favourites];
-    let tempFavourites = getFromLocalStorage("favourites") || []
-    let positionInFavourites = findMissionByKey(tempFavourites, launch.flight_number);
-    if (positionInFavourites === -1) {
-      tempFavourites.push(launch)
-    } else {
-      tempFavourites.splice(positionInFavourites, 1)
-    }
-    setFavourites(tempFavourites);
-  };
-
-  const displayFavouriteIcon = () => {
-    if (isSmall) return <noscript />
-    return findMissionByKey(favourites, launch.flight_number) > -1? (
-      <Box
-        as={BsDiamondFill}
-        size="24px"
-        color="yellow.400"
-        onClick={(e) => processFavourite(e)}
-      />
-    ) : (
-      <Box
-        as={BsDiamond}
-        size="24px"
-        color="yellow.400"
-        onClick={(e) => processFavourite(e)}
-      />
-    );
-  };
-
   const displayImage = () => {
     return isSmall ? (
       <Image
@@ -209,7 +146,7 @@ export function LaunchItem({ launch, isSmall }) {
           justifyContent="space-between"
         >
           {launch.mission_name}
-          {displayFavouriteIcon()}
+          <FavouriteIcon launch={launch} shouldNotShow={isSmall}></FavouriteIcon>
         </Flex>
         <Flex>
           <Text fontSize="sm">{formatDate(launch.launch_date_utc)} </Text>
