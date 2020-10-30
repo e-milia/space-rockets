@@ -64,6 +64,25 @@ export default function Launches() {
   );
 }
 
+// export function FavouriteIcon({favourites, key}) {
+//   return findMissionByKey(favourites, launch.flight_number) > -1? (
+//     <Box
+//       as={BsDiamondFill}
+//       size="24px"
+//       color="yellow.400"
+//       onClick={(e) => processFavourite(e)}
+//     />
+//   ) : (
+//     <Box
+//       as={BsDiamond}
+//       size="24px"
+//       color="yellow.400"
+//       onClick={(e) => processFavourite(e)}
+//     />
+//   );
+// };
+
+
 export function LaunchItem({ launch, isSmall }) {
   console.log('re-rendering launch item')
   const favouritesData = getFromLocalStorage("favourites") || [];
@@ -88,6 +107,7 @@ export function LaunchItem({ launch, isSmall }) {
   };
 
   const displayFavouriteIcon = () => {
+    if (isSmall) return <noscript />
     return findMissionByKey(favourites, launch.flight_number) > -1? (
       <Box
         as={BsDiamondFill}
