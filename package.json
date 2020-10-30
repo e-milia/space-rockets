@@ -13,14 +13,15 @@
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
     "history": "^5.0.0",
-    "patch-package": "^6.2.2",
     "moment": "^2.29.1",
+    "patch-package": "^6.2.2",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-icons": "^3.11.0",
     "react-router": "^6.0.0-beta.0",
-    "react-router-dom": "^6.0.0-alpha.3",
+    "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "3.4.3",
     "swr": "^0.3.0",
     "timeago.js": "^4.0.2"
@@ -32,7 +33,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "post-install": "patch-package"
+    "post-install": "patch-package",
+    "lint": "eslint src --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,5 +50,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.21.5"
   }
 }

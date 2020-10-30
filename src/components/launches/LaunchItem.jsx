@@ -1,67 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   Badge,
   Box,
   Image,
-  SimpleGrid,
   Text,
   Flex,
-} from "@chakra-ui/core";
-import { format as timeAgo } from "timeago.js";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/core';
+import { format as timeAgo } from 'timeago.js';
+import { Link } from 'react-router-dom';
 
-import { useSpaceXPaginated } from "../utils/use-space-x";
-import { formatDate } from "../utils/format-date";
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
-import LoadMoreButton from "./load-more-button";
-import FavouritesDrawer from './favourites-drawer'
-import FavouriteIcon from "./favourites-icon";
+import { formatDate } from '../../utils/format-date';
+import FavouriteIcon from './FavouritesIcon';
 
-const PAGE_SIZE = 12;
-
-export default function Launches() {
-  const { data, error, isValidating, setSize, size } = useSpaceXPaginated(
-    "/launches/past",
-    {
-      limit: PAGE_SIZE,
-      order: "desc",
-      sort: "launch_date_utc",
-    }
-  );
-  console.log(data, error);
-  return (
-    <div>
-      <Flex lineHeight="tight" justifyContent="space-between" align="center">
-        <Breadcrumbs
-          items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
-        />
-        <FavouritesDrawer />
-      </Flex>
-      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
-        {error && <Error />}
-        {data &&
-          data
-            .flat()
-            .map((launch) => (
-              <LaunchItem
-                launch={launch}
-                key={launch.flight_number}
-                isSmall={false}
-              />
-            ))}
-      </SimpleGrid>
-      <LoadMoreButton
-        loadMore={() => setSize(size + 1)}
-        data={data}
-        pageSize={PAGE_SIZE}
-        isLoadingMore={isValidating}
-      />
-    </div>
-  );
-}
-
-export function LaunchItem({ launch, isSmall }) {
+export default function LaunchItem({ launch, isSmall }) {
   const displayImage = () => {
     return isSmall ? (
       <Image
