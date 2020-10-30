@@ -22,6 +22,9 @@ import {
   Tooltip,
 } from "@chakra-ui/core";
 
+import FavouritesDrawer from './favourites-drawer'
+import FavouritesIcon from './favourites-icon'
+
 import { useSpaceX } from "../utils/use-space-x";
 import { formatDateTime } from "../utils/format-date";
 import Error from "./error";
@@ -42,13 +45,19 @@ export default function Launch() {
 
   return (
     <div>
-      <Breadcrumbs
-        items={[
-          { label: "Home", to: "/" },
-          { label: "Launches", to: ".." },
-          { label: `#${launch.flight_number}` },
-        ]}
-      />
+      <Flex lineHeight="tight" justifyContent="space-between" align="center">
+        <Flex justifyContent="start" align="center">
+          <Breadcrumbs
+            items={[
+              { label: "Home", to: "/" },
+              { label: "Launches", to: ".." },
+              { label: `#${launch.flight_number}` },
+            ]}
+          />
+          <FavouritesIcon launch={launch} isSmall={false} />
+        </Flex>
+        <FavouritesDrawer />
+      </Flex>
       <Header launch={launch} />
       <Box m={[3, 6]}>
         <TimeAndLocation launch={launch} />
@@ -105,10 +114,10 @@ function Header({ launch }) {
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
-            Failed
-          </Badge>
-        )}
+            <Badge variantColor="red" fontSize={["xs", "md"]}>
+              Failed
+            </Badge>
+          )}
       </Stack>
     </Flex>
   );

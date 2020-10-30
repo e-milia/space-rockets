@@ -1,5 +1,12 @@
 import React from "react";
-import { Badge, Box, Image, SimpleGrid, Text, Flex } from "@chakra-ui/core";
+import {
+  Badge,
+  Box,
+  Image,
+  SimpleGrid,
+  Text,
+  Flex,
+} from "@chakra-ui/core";
 import { format as timeAgo } from "timeago.js";
 import { Link } from "react-router-dom";
 
@@ -8,6 +15,8 @@ import { formatDate } from "../utils/format-date";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
+import FavouritesDrawer from './favourites-drawer'
+import FavouriteIcon from "./favourites-icon";
 
 const PAGE_SIZE = 12;
 
@@ -23,16 +32,23 @@ export default function Launches() {
   console.log(data, error);
   return (
     <div>
-      <Breadcrumbs
-        items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
-      />
+      <Flex lineHeight="tight" justifyContent="space-between" align="center">
+        <Breadcrumbs
+          items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
+        />
+        <FavouritesDrawer />
+      </Flex>
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {error && <Error />}
         {data &&
           data
             .flat()
             .map((launch) => (
-              <LaunchItem launch={launch} key={launch.flight_number} />
+              <LaunchItem
+                launch={launch}
+                key={launch.flight_number}
+                isSmall={false}
+              />
             ))}
       </SimpleGrid>
       <LoadMoreButton
@@ -45,7 +61,47 @@ export default function Launches() {
   );
 }
 
-export function LaunchItem({ launch }) {
+export function LaunchItem({ launch, isSmall }) {
+  const displayImage = () => {
+    return isSmall ? (
+      <Image
+        src={
+          launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+          launch.links.mission_patch_small
+        }
+        alt={`${launch.mission_name} launch`}
+        height={["80px", null, "120px"]}
+        width="100%"
+        objectFit="cover"
+        objectPosition="centre"
+      />
+    ) : (
+        <Box>
+          <Image
+            src={
+              launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+              launch.links.mission_patch_small
+            }
+            alt={`${launch.mission_name} launch`}
+            height={["200px", null, "300px"]}
+            width="100%"
+            objectFit="cover"
+            objectPosition="bottom"
+          />
+
+          <Image
+            position="absolute"
+            top="5"
+            right="5"
+            src={launch.links.mission_patch_small}
+            height="75px"
+            objectFit="contain"
+            objectPosition="bottom"
+          />
+        </Box>
+      );
+  };
+
   return (
     <Box
       as={Link}
@@ -56,27 +112,7 @@ export function LaunchItem({ launch }) {
       overflow="hidden"
       position="relative"
     >
-      <Image
-        src={
-          launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-          launch.links.mission_patch_small
-        }
-        alt={`${launch.mission_name} launch`}
-        height={["200px", null, "300px"]}
-        width="100%"
-        objectFit="cover"
-        objectPosition="bottom"
-      />
-
-      <Image
-        position="absolute"
-        top="5"
-        right="5"
-        src={launch.links.mission_patch_small}
-        height="75px"
-        objectFit="contain"
-        objectPosition="bottom"
-      />
+      {displayImage()}
 
       <Box p="6">
         <Box d="flex" alignItems="baseline">
@@ -85,10 +121,10 @@ export function LaunchItem({ launch }) {
               Successful
             </Badge>
           ) : (
-            <Badge px="2" variant="solid" variantColor="red">
-              Failed
-            </Badge>
-          )}
+              <Badge px="2" variant="solid" variantColor="red">
+                Failed
+              </Badge>
+            )}
           <Box
             color="gray.500"
             fontWeight="semibold"
@@ -101,15 +137,17 @@ export function LaunchItem({ launch }) {
           </Box>
         </Box>
 
-        <Box
+        <Flex
           mt="1"
           fontWeight="semibold"
           as="h4"
           lineHeight="tight"
           isTruncated
+          justifyContent="space-between"
         >
           {launch.mission_name}
-        </Box>
+          <FavouriteIcon launch={launch} shouldNotShow={isSmall}></FavouriteIcon>
+        </Flex>
         <Flex>
           <Text fontSize="sm">{formatDate(launch.launch_date_utc)} </Text>
           <Text color="gray.500" ml="2" fontSize="sm">
