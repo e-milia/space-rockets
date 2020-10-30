@@ -39,7 +39,6 @@ export default function FavouritesDrawer() {
         onClose={onClose}
         finalFocusRef={btnRef}
         size="sm"
-        closeOnOverlayClick={false}
       >
         <DrawerOverlay />
         <DrawerContent textAlign="center"  backgroundColor="gray.100">
