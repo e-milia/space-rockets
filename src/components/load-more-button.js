@@ -19,8 +19,8 @@ export default function LoadMoreButton({
         ) : isReachingEnd ? (
           "That's all!"
         ) : (
-          "Show more..."
-        )}
+              "Show more..."
+            )}
       </Button>
     </Flex>
   );

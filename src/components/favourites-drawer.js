@@ -29,7 +29,7 @@ export default function FavouritesDrawer() {
     <>
       <Flex onClick={onOpen} m={[2, null, 6]}>
         <Button color="white" backgroundColor="gray.800" onClick={onOpen} ref={btnRef}>
-        < Box as={BsDiamondFill} size="24px" color="yellow.400" mr="2" />
+          < Box as={BsDiamondFill} size="24px" color="yellow.400" mr="2" />
           View Favourites
         </Button>
       </Flex>
@@ -41,7 +41,7 @@ export default function FavouritesDrawer() {
         size="sm"
       >
         <DrawerOverlay />
-        <DrawerContent textAlign="center"  backgroundColor="gray.100">
+        <DrawerContent textAlign="center" backgroundColor="gray.100">
           <DrawerCloseButton />
           <DrawerHeader>
             <Text
@@ -54,7 +54,7 @@ export default function FavouritesDrawer() {
           </DrawerHeader>
 
           <DrawerBody textAlign="left">
-            <Text 
+            <Text
               m={[2, null, 6]}
               fontWeight="bold"
               fontSize="lg"
@@ -64,15 +64,15 @@ export default function FavouritesDrawer() {
             <SimpleGrid m={[2, null, 0]} spacing="2">
               {favourites &&
                 favourites
-                .flat()
-                .map((launch) => (
-                  <LaunchItem
-                  launch={launch}
-                  key={launch.flight_number}
-                  isSmall={true}
-                  />
-                ))}
-              </SimpleGrid>
+                  .flat()
+                  .map((launch) => (
+                    <LaunchItem
+                      launch={launch}
+                      key={launch.flight_number}
+                      isSmall={true}
+                    />
+                  ))}
+            </SimpleGrid>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

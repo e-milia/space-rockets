@@ -76,30 +76,30 @@ export function LaunchItem({ launch, isSmall }) {
         objectPosition="centre"
       />
     ) : (
-      <Box>
-        <Image
-          src={
-            launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-            launch.links.mission_patch_small
-          }
-          alt={`${launch.mission_name} launch`}
-          height={["200px", null, "300px"]}
-          width="100%"
-          objectFit="cover"
-          objectPosition="bottom"
-        />
+        <Box>
+          <Image
+            src={
+              launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+              launch.links.mission_patch_small
+            }
+            alt={`${launch.mission_name} launch`}
+            height={["200px", null, "300px"]}
+            width="100%"
+            objectFit="cover"
+            objectPosition="bottom"
+          />
 
-        <Image
-          position="absolute"
-          top="5"
-          right="5"
-          src={launch.links.mission_patch_small}
-          height="75px"
-          objectFit="contain"
-          objectPosition="bottom"
-        />
-      </Box>
-    );
+          <Image
+            position="absolute"
+            top="5"
+            right="5"
+            src={launch.links.mission_patch_small}
+            height="75px"
+            objectFit="contain"
+            objectPosition="bottom"
+          />
+        </Box>
+      );
   };
 
   return (
@@ -121,10 +121,10 @@ export function LaunchItem({ launch, isSmall }) {
               Successful
             </Badge>
           ) : (
-            <Badge px="2" variant="solid" variantColor="red">
-              Failed
-            </Badge>
-          )}
+              <Badge px="2" variant="solid" variantColor="red">
+                Failed
+              </Badge>
+            )}
           <Box
             color="gray.500"
             fontWeight="semibold"

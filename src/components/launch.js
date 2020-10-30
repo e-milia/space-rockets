@@ -52,9 +52,9 @@ export default function Launch() {
               { label: "Launches", to: ".." },
               { label: `#${launch.flight_number}` },
             ]}
-            />
-          <FavouritesIcon launch={launch} isSmall={false}/>
-          </Flex>
+          />
+          <FavouritesIcon launch={launch} isSmall={false} />
+        </Flex>
         <FavouritesDrawer />
       </Flex>
       <Header launch={launch} />
@@ -102,7 +102,7 @@ function Header({ launch }) {
         py="2"
         borderRadius="lg"
       >
-      {launch.mission_name}
+        {launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
         <Badge variantColor="purple" fontSize={["xs", "md"]}>
@@ -113,10 +113,10 @@ function Header({ launch }) {
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
-            Failed
-          </Badge>
-        )}
+            <Badge variantColor="red" fontSize={["xs", "md"]}>
+              Failed
+            </Badge>
+          )}
       </Stack>
     </Flex>
   );
