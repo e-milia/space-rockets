@@ -62,7 +62,7 @@ export default function FavouritesDrawer() {
               {`Launches (${count})`}
             </Text>
             <SimpleGrid m={[2, null, 0]} spacing="2">
-              {favourites
+              {favourites && favourites.length
                 && favourites
                   .flat()
                   .map((launch) => (
