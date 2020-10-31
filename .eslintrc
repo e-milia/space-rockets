@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "env": {
+    "jest": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-filename-extension": "off",
+    "no-nested-ternary": "off",
+    "no-undef": "off",
+    "no-return-await": "off",
+    "no-restricted-syntax": "off",
+    "guard-for-in": "off"
+  }
+}

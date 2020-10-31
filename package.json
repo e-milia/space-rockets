@@ -1,6 +1,6 @@
 {
   "name": "pleo-space-rockets-app",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "contributors": [
     "Maciek Pekala <maciek@pleo.io>",
     "Peter Scott <peter@pleo.io>"
@@ -12,16 +12,19 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
+    "enzyme": "^3.11.0",
     "history": "^5.0.0",
-    "patch-package": "^6.2.2",
     "moment": "^2.29.1",
+    "patch-package": "^6.2.2",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-icons": "^3.11.0",
     "react-router": "^6.0.0-beta.0",
-    "react-router-dom": "^6.0.0-alpha.3",
-    "react-scripts": "3.4.3",
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-scripts": "3.4.0",
+    "regenerator-runtime": "^0.13.7",
     "swr": "^0.3.0",
     "timeago.js": "^4.0.2"
   },
@@ -30,9 +33,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "post-install": "patch-package"
+    "build": "yarn run lint && react-scripts build",
+    "test": "jest --config=jest.config.js --env=jsdom-sixteen --coverage",
+    "post-install": "patch-package",
+    "lint": "eslint src --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,5 +52,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.21.5",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "react-test-renderer": "^17.0.1"
   }
 }

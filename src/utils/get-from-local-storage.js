@@ -1,2 +1,1 @@
-export const getFromLocalStorage = (item) =>
-  JSON.parse(localStorage.getItem(item) || "null");
+export default (item) => JSON.parse(localStorage.getItem(item) || 'null');

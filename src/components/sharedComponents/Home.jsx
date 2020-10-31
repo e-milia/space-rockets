@@ -1,7 +1,11 @@
-import React from "react";
-import { Flex, Box, Text, Stack, Link } from "@chakra-ui/core";
-import { ArrowRight } from "react-feather";
-import { Link as BrowserLink } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import {
+  Flex, Box, Text, Stack, Link,
+} from '@chakra-ui/core';
+import { ArrowRight } from 'react-feather';
+import { Link as BrowserLink } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -28,3 +32,8 @@ function PageLink({ url, children, ...rest }) {
     </Link>
   );
 }
+
+PageLink.propTypes = {
+  url: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
+};

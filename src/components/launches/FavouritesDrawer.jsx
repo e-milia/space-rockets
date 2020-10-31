@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   SimpleGrid,
@@ -12,24 +12,24 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   useDisclosure,
-} from "@chakra-ui/core";
-import { BsDiamondFill } from "react-icons/bs";
+} from '@chakra-ui/core';
+import { BsDiamondFill } from 'react-icons/bs';
 
-import { LaunchItem } from './launches'
-import { getFromLocalStorage } from "../utils/get-from-local-storage";
+import LaunchItem from './LaunchItem';
+import getFromLocalStorage from '../../utils/get-from-local-storage';
 
 export default function FavouritesDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  const favourites = getFromLocalStorage("favourites") || [];
+  const favourites = getFromLocalStorage('favourites') || [];
   const count = favourites && favourites.length;
 
   return (
     <>
       <Flex onClick={onOpen} m={[2, null, 6]}>
         <Button color="white" backgroundColor="gray.800" onClick={onOpen} ref={btnRef}>
-          < Box as={BsDiamondFill} size="24px" color="yellow.400" mr="2" />
+          <Box as={BsDiamondFill} size="24px" color="yellow.400" mr="2" />
           View Favourites
         </Button>
       </Flex>
@@ -62,14 +62,14 @@ export default function FavouritesDrawer() {
               {`Launches (${count})`}
             </Text>
             <SimpleGrid m={[2, null, 0]} spacing="2">
-              {favourites &&
-                favourites
+              {favourites && favourites.length
+                && favourites
                   .flat()
                   .map((launch) => (
                     <LaunchItem
                       launch={launch}
                       key={launch.flight_number}
-                      isSmall={true}
+                      isSmall
                     />
                   ))}
             </SimpleGrid>

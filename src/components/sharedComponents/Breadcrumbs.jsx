@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Box,
-} from "@chakra-ui/core";
-import { Link } from "react-router-dom";
-import { ChevronsRight } from "react-feather";
+} from '@chakra-ui/core';
+import { Link } from 'react-router-dom';
+import { ChevronsRight } from 'react-feather';
 
 export default function Breadcrumbs({ items }) {
   return (
@@ -31,3 +32,10 @@ export default function Breadcrumbs({ items }) {
     </Breadcrumb>
   );
 }
+
+Breadcrumbs.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    to: PropTypes.string,
+    label: PropTypes.string,
+  })).isRequired,
+};
