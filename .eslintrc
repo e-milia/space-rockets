@@ -17,6 +17,7 @@
   },
   "rules": {
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-filename-extension": "off",
     "no-nested-ternary": "off",
     "no-undef": "off",
     "no-return-await": "off",

@@ -1,6 +1,6 @@
 {
   "name": "pleo-space-rockets-app",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "contributors": [
     "Maciek Pekala <maciek@pleo.io>",
     "Peter Scott <peter@pleo.io>"
@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn run lint && react-scripts build",
     "test": "jest --config=jest.config.js --env=jsdom-sixteen --coverage",
     "post-install": "patch-package",
     "lint": "eslint src --fix"
